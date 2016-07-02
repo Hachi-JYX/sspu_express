@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -72,13 +73,22 @@
 
     </RelativeLayout>
 
-    <caoxltest.administrator.caoxltest.widget.MyPullUpListView
-        android:layout_marginTop="10dp"
-        android:id="@+id/lv_data"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#C9CACA"
-        android:dividerHeight="1dp">
-    </caoxltest.administrator.caoxltest.widget.MyPullUpListView>
+        android:layout_height="match_parent">
+        <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+            android:layout_marginTop="10dp"
+            android:id="@+id/lv_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:frv_divider="#696969"
+            app:frv_dividerHeight="1dp"
+            app:frv_layoutManager="linear"
+            app:frv_layoutManagerOrientation="vertical">
+        </cn.iwgang.familiarrecyclerview.FamiliarRecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

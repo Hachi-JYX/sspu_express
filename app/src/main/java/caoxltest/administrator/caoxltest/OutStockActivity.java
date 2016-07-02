@@ -145,11 +145,6 @@ public class OutStockActivity extends AppCompatActivity implements DefineView {
         }
 
     }
-
-
-
-
-
     @Override
     public void init() {
         etXh = (EditText) findViewById(R.id.et_xh);
