@@ -49,6 +49,8 @@
                     android:paddingLeft="5dp"
                     android:hint="请输入学号或者快递单号"
                     android:textSize="12sp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
                     android:background="@null"/>
                 <ImageView
                     android:id="@+id/iv_clean"
@@ -70,13 +72,13 @@
 
     </RelativeLayout>
 
-    <ListView
+    <caoxltest.administrator.caoxltest.widget.MyPullUpListView
         android:layout_marginTop="10dp"
         android:id="@+id/lv_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="#C9CACA"
         android:dividerHeight="1dp">
-    </ListView>
+    </caoxltest.administrator.caoxltest.widget.MyPullUpListView>
 
 </LinearLayout>
