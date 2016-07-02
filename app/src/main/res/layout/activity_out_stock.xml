@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/search_color">
+
+    <RelativeLayout
+        android:id="@+id/rv_out_title"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:background="@color/maintitle">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/back"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:textSize="@dimen/fs_20"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="快递出库"/>
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_below="@id/rv_out_title"
+        android:id="@+id/lv_out_xh"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/btn_white">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="25dp"
+            android:layout_marginRight="5dp"
+            android:src="@mipmap/t_icon1"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="25dp"
+            android:background="#C9CACA"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/fs_20"
+            android:text="学       号"/>
+
+        <EditText
+            android:id="@+id/et_xh"
+            android:layout_marginLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:background="@null"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lv_out_dh"
+        android:layout_below="@id/lv_out_xh"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:focusable="false"
+        android:background="@drawable/btn_white">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:focusable="false"
+            android:src="@mipmap/t_icon2"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="25dp"
+            android:background="#C9CACA"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/fs_20"
+            android:layout_marginLeft="5dp"
+            android:focusable="false"
+            android:text="快递单号"/>
+
+        <EditText
+            android:id="@+id/et_dh"
+            android:layout_marginLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:background="@null"
+            android:singleLine="true"
+            android:windowSoftInputMode="stateAlwaysVisible"
+            ></EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lv_out_xm"
+        android:layout_below="@id/lv_out_dh"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/btn_white">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="25dp"
+            android:layout_marginRight="5dp"
+            android:src="@mipmap/t_icon3"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="25dp"
+            android:background="#C9CACA"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/fs_20"
+            android:layout_marginLeft="5dp"
+            android:text="姓       名"/>
+
+        <EditText
+            android:id="@+id/et_xm"
+            android:layout_marginLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:background="@null"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/lv_out_xm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=""
+        android:textSize="25sp"
+        android:textColor="#ff0000"/>
+
+    <Button
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/btnok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/fontColor"
+        android:text="确定"
+        android:background="@drawable/btn"
+        android:layout_marginBottom="40dp"
+        android:textSize="@dimen/fs_20"/>
+
+</RelativeLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/search_color">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp">
+
+       <ImageView
+           android:id="@+id/iv_dot"
+           android:layout_marginLeft="25dp"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:layout_centerVertical="true"
+           android:src="@mipmap/dot"/>
+        <TextView
+            android:id="@+id/tv_dh"
+            android:layout_toRightOf="@id/iv_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:text="3555555555555"
+            android:textColor="@color/col_5F5D5D"
+            android:textSize="@dimen/fs_20"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:text="2016-06-30 17:59"
+            android:layout_marginRight="6dp"
+            android:textColor="@color/col_A1A1A1"
+            android:textSize="15sp"/>
+    </RelativeLayout>
+
+</LinearLayout>

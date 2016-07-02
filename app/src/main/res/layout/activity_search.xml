@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/search_color">
+    <RelativeLayout
+        android:id="@+id/rv_out_title"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:background="@color/maintitle">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/back"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:textSize="@dimen/fs_20"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="校园快递"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="4"
+                android:background="@drawable/btn_white">
+                <EditText
+                    android:id="@+id/et_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="5dp"
+                    android:hint="请输入学号或者快递单号"
+                    android:textSize="12sp"
+                    android:background="@null"/>
+                <ImageView
+                    android:id="@+id/iv_clean"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/clean"/>
+            </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/search"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ListView
+        android:layout_marginTop="10dp"
+        android:id="@+id/lv_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#C9CACA"
+        android:dividerHeight="1dp">
+    </ListView>
+
+</LinearLayout>
