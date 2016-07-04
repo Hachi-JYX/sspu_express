@@ -16,11 +16,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.db.table.Id;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+
+import java.util.ArrayList;
 import java.util.List;
 import caoxltest.administrator.caoxltest.adapter.SearchInfoAdapter;
 import caoxltest.administrator.caoxltest.bean.DetailBean;
@@ -43,7 +46,7 @@ public class SearchActivity extends AppCompatActivity implements DefineView {
     private InfoBean infoBean;
     private boolean isLoadingMore = false;
     private SearchInfoAdapter adapter;
-    private List<DetailBean.ElementsBean> list ;
+    private List<DetailBean.ElementsBean> list;
     private LinearLayoutManager mLayoutManager;
     private View empty;
     private int flag;
@@ -68,7 +71,7 @@ public class SearchActivity extends AppCompatActivity implements DefineView {
                 if (adapter!=null){
                     list.clear();
                     isEmpty = false;
-                    page =1;
+                    page = 1;
                     listView.removeFooterView(empty);
                     adapter.notifyDataSetChanged();
                 }
@@ -79,10 +82,14 @@ public class SearchActivity extends AppCompatActivity implements DefineView {
             public void onClick(View v) {
                 String rtId = et_info.getText().toString();
                 task(rtId);
-                getXh();
-                if (page==1){
-                    requestNet();
+                if (rtId.length() == 8){
+                    getXh();
+                }else {
+                    if (page == 1){
+                        requestNet();
+                    }
                 }
+
             }
         });
 
@@ -99,10 +106,14 @@ public class SearchActivity extends AppCompatActivity implements DefineView {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
                     String rtId = et_info.getText().toString();
                     task(rtId);
-                    getXh();
-                    if (page==1){
-                        requestNet();
+                    if (rtId.length() == 8){
+                        getXh();
+                    }else {
+                        if (page == 1){
+                            requestNet();
+                        }
                     }
+
                     return true;
                 }
                 return false;
@@ -116,6 +127,8 @@ public class SearchActivity extends AppCompatActivity implements DefineView {
             return;
         }
         final RequestParams params = new RequestParams();
+        Log.d("log",page+"PAGE");
+        Log.d("log", "id:" + id);
         params.addQueryStringParameter("findParmeter",id);
         params.addQueryStringParameter("page",String.valueOf(page++));
         params.addQueryStringParameter("rows",String.valueOf(rows));
@@ -190,6 +203,7 @@ public class SearchActivity extends AppCompatActivity implements DefineView {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
+        list = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(this);
         listView.setLayoutManager(mLayoutManager);
         listView.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -219,9 +233,11 @@ public class SearchActivity extends AppCompatActivity implements DefineView {
             s = s.substring(s.length()-11,s.length());
             flag = 1;
             id = s;
+            et_info.setText(s);
         }else  if(text.length() == 8){//66B407DE
             flag = 2;
             id = text.toUpperCase();
+            et_info.setText(id);
         }else {
             flag = 3;
             id = text;
@@ -232,78 +248,45 @@ public class SearchActivity extends AppCompatActivity implements DefineView {
         if (id == "") {
             return;
         }
-        //不是物理地址
-        if (flag != 2){
-            RequestParams params = new RequestParams();
-            params.addQueryStringParameter("CardLID",id);
-            HttpUtils http = new HttpUtils(10000);
-            http.configCurrentHttpCacheExpiry(10);
-            http.send(HttpRequest.HttpMethod.GET,
-                    Api.Net1,
-                    params,
-                    new RequestCallBack<String>(){
-                        @Override
-                        public void onLoading(long total, long current, boolean isUploading) {
-                        }
-                        @Override
-                        public void onSuccess(ResponseInfo<String> responseInfo) {
-                            String res = responseInfo.result;
-                            if (res.contains("html")){
-                                Toast.makeText(SearchActivity.this,"网站正在修复中",Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                            Gson gson = new Gson();
-                            infoBean = gson.fromJson(res,InfoBean.class);
-                            if (infoBean!=null && infoBean.getRes()==200){
-                                et_info.setText(infoBean.getXh());
-                            }else {
-                                Toast.makeText(SearchActivity.this,infoBean.getMsg(),Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        @Override
-                        public void onStart() {
-                        }
-                        @Override
-                        public void onFailure(HttpException error, String msg) {
-                        }
-                    });
-        }
-        else {//是物理地址
-            RequestParams params = new RequestParams();
-            params.addQueryStringParameter("CardPID",id);
-            HttpUtils http = new HttpUtils();
-            http.send(HttpRequest.HttpMethod.GET,
-                    Api.Net1,
-                    params,
-                    new RequestCallBack<String>(){
-                        @Override
-                        public void onLoading(long total, long current, boolean isUploading) {
-                        }
+        RequestParams params = new RequestParams();
+        params.addQueryStringParameter("CardPID",id);
+        HttpUtils http = new HttpUtils(10000);
+        http.configCurrentHttpCacheExpiry(10);
+        http.send(HttpRequest.HttpMethod.GET,
+                Api.Net1,
+                params,
+                new RequestCallBack<String>(){
+                    @Override
+                    public void onLoading(long total, long current, boolean isUploading) {
+                    }
 
-                        @Override
-                        public void onSuccess(ResponseInfo<String> responseInfo) {
-                            String res = responseInfo.result;
-                            if (res.contains("html")){
-                                Toast.makeText(SearchActivity.this,"网站正在修复中",Toast.LENGTH_SHORT).show();
-                                return;
+                    @Override
+                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                        String res = responseInfo.result;
+                        if (res.contains("html")){
+                            Toast.makeText(SearchActivity.this,"网站正在修复中",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Gson gson = new Gson();
+                        infoBean = gson.fromJson(res,InfoBean.class);
+                        if (infoBean!=null && infoBean.getRes()==200){
+                            et_info.setText(infoBean.getXh());
+                            id = infoBean.getXh();
+                            if (page==1){
+                                requestNet();
                             }
-                            Gson gson = new Gson();
-                            infoBean = gson.fromJson(res,InfoBean.class);
-                            if (infoBean!=null && infoBean.getRes()==200){
-                                et_info.setText(infoBean.getXh());
-                            }else {
-                                Toast.makeText(SearchActivity.this,infoBean.getMsg(),Toast.LENGTH_SHORT).show();
-                            }
+                        }else {
+                            Toast.makeText(SearchActivity.this,infoBean.getMsg(),Toast.LENGTH_SHORT).show();
                         }
+                    }
 
-                        @Override
-                        public void onStart() {
-                        }
+                    @Override
+                    public void onStart() {
+                    }
 
-                        @Override
-                        public void onFailure(HttpException error, String msg) {
-                        }
-                    });
-        }
+                    @Override
+                    public void onFailure(HttpException error, String msg) {
+                    }
+                });
     }
 }
